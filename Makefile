@@ -13,7 +13,7 @@ logs:
 	docker compose logs -f
 
 shell:
-	docker compose exec app sh
+	docker compose exec app bash
 
 down:
 	docker compose down -v
