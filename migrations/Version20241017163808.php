@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20241017093417 extends AbstractMigration
+final class Version20241017163808 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,13 +20,14 @@ final class Version20241017093417 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TABLE task (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, priority_id INTEGER NOT NULL, title VARCHAR(255) NOT NULL, description CLOB DEFAULT NULL, done BOOLEAN NOT NULL, CONSTRAINT FK_527EDB25497B19F9 FOREIGN KEY (priority_id) REFERENCES importance (id) NOT DEFERRABLE INITIALLY IMMEDIATE)');
-        $this->addSql('CREATE INDEX IDX_527EDB25497B19F9 ON task (priority_id)');
+        $this->addSql('CREATE TABLE priority (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, color VARCHAR(255) NOT NULL)');
+        $this->addSql('DROP TABLE importance');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('DROP TABLE task');
+        $this->addSql('CREATE TABLE importance (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, color VARCHAR(255) NOT NULL COLLATE "BINARY", title VARCHAR(255) NOT NULL COLLATE "BINARY")');
+        $this->addSql('DROP TABLE priority');
     }
 }

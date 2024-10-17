@@ -20,9 +20,8 @@ class Task
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?importance $priority = null;
+    #[ORM\ManyToOne(inversedBy: 'tasks')]
+    private ?Priority $priority = null;
 
     #[ORM\Column]
     private ?bool $done = null;
@@ -56,12 +55,12 @@ class Task
         return $this;
     }
 
-    public function getPriority(): ?importance
+    public function getPriority(): ?Priority
     {
         return $this->priority;
     }
 
-    public function setPriority(?importance $priority): static
+    public function setPriority(?Priority $priority): static
     {
         $this->priority = $priority;
 
