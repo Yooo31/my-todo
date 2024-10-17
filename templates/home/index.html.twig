@@ -3,5 +3,48 @@
 {% block title %}My Todo List{% endblock %}
 
 {% block body %}
-{# {% include 'home/modal.html.twig' with {'priorities': priorities} %} #}
+{% include 'home/modal.html.twig' with {'priorities': priorities} %}
+
+<section class="bg-gray-900 text-white">
+  <div class="flex justify-center items-center min-h-screen">
+    <div class="w-3/4 flex gap-6">
+      <div class="w-1/3">
+        <div class="bg-gray-800 rounded-lg shadow-lg p-6">
+          <h2 class="text-lg font-semibold mb-4">Priorités</h2>
+          <ul id="priority-list" class="space-y-2">
+            <li class="p-3 bg-gray-700 rounded-lg">Haute priorité</li>
+            <li class="p-3 bg-gray-700 rounded-lg">Moyenne priorité</li>
+            <li class="p-3 bg-gray-700 rounded-lg">Basse priorité</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="w-2/3">
+        <div class="bg-gray-800 rounded-lg shadow-lg p-6">
+          <h2 class="text-lg font-semibold mb-4">Liste des Tâches</h2>
+          <ul id="task-list" class="space-y-4">
+            <li class="p-4 bg-gray-700 rounded-lg flex justify-between items-center">
+              <span>Tâche 1 - Réaliser le front-end</span>
+              <span class="text-sm bg-blue-500 px-2 py-1 rounded">Moyenne</span>
+            </li>
+            <li class="p-4 bg-gray-700 rounded-lg flex justify-between items-center">
+              <span>Tâche 2 - Configurer l'API</span>
+              <span class="text-sm bg-red-500 px-2 py-1 rounded">Haute</span>
+            </li>
+            <li class="p-4 bg-gray-700 rounded-lg flex justify-between items-center">
+              <span>Tâche 3 - Déployer le projet</span>
+              <span class="text-sm bg-green-500 px-2 py-1 rounded">Basse</span>
+            </li>
+            <li id="defaultModalButton" data-modal-target="defaultModal" data-modal-toggle="defaultModal" class="p-4 bg-gray-700 rounded-lg flex justify-between items-center border-2 border-dotted border-gray-500 cursor-pointer transition duration-300 hover:bg-gray-600/75">
+              <span class="w-full text-center text-gray-400">
+                Ajouter une tâche
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 {% endblock %}
