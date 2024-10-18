@@ -1,0 +1,9 @@
+nelmio_api_doc:
+    documentation:
+        info:
+            title: My ToDo App
+            description: This is a ToDo App for Ynov
+            version: 1.0.0
+    areas:
+        path_patterns:
+            - ^\/(?!_).*
