@@ -3,25 +3,38 @@
 namespace App\Controller;
 
 use App\Entity\Task;
-use App\Form\TaskType;
 use App\Repository\PriorityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use OpenApi\Attributes as OA;
+use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/task', name: 'task.')]
 class TaskController extends AbstractController
 {
 
-    // #[Route('/{id}', name: 'show')]
-    // public function show($id): Response
-    // {
-    // }
-
     #[Route('/new', name: 'new', methods: ['POST'])]
+    #[OA\Response(
+        response: 201,
+        description: 'Creation of new task'
+    )]
+    #[OA\Response(
+        response: 400,
+        description: 'Return if json is invalid'
+    )]
+    #[OA\RequestBody(
+        required: true,
+        content: new OA\JsonContent(
+            required: ['title', 'description', 'priority'],
+            properties: [
+                new OA\Property(property: 'title', type: 'string', example: 'New Task'),
+                new OA\Property(property: 'description', type: 'string', example: 'Description of the task'),
+                new OA\Property(property: 'priority', type: 'integer', example: 1)
+            ]
+        )
+    )]
     public function new(
         Request $request,
         EntityManagerInterface $entityManager,
@@ -49,8 +62,6 @@ class TaskController extends AbstractController
 
         return new JsonResponse(['success' => 'Task created'], 201);
     }
-
-
 
     // #[Route('/edit/{id}', name: 'edit')]
     // public function edit($id): Response
