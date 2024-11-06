@@ -43,16 +43,16 @@ class TaskController extends AbstractController
     ): JsonResponse {
         $data = json_decode($request->getContent(), true);
 
-        if (!$data) {
+        if (!is_array($data)) {
             return new JsonResponse(['error' => 'Invalid JSON'], 400);
         }
 
         $task = new Task();
-        $task->setTitle($data['title'] ?? '');
-        $task->setDescription($data['description'] ?? '');
+        $task->setTitle((string) ($data['title'] ?? ''));
+        $task->setDescription((string) ($data['description'] ?? ''));
         $task->setDone(false);
 
-        $priority = $priorityRepository->find($data['priority']);
+        $priority = isset($data['priority']) ? $priorityRepository->find((int) $data['priority']) : null;
         if (!$priority) {
             return new JsonResponse(['error' => 'Invalid priority'], 400);
         }
