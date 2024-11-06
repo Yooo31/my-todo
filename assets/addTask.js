@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (response.ok) {
         alert('Task added successfully!');
         e.target.reset(); // Réinitialisation du formulaire
-        document.querySelector('[data-modal-toggle="defaultModal"]').click(); // Fermeture du modal
+        document.querySelector('[data-modal-toggle="modalNewTask"]').click(); // Fermeture du modal
       } else {
         const errors = await response.json();
         alert('Error: ' + JSON.stringify(errors));
